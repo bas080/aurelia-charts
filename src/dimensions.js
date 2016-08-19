@@ -14,9 +14,7 @@ export function entityDimensions(entity) {
 
   return Object.keys(entity).map(key => {
     return {
-      label: datum => {
-        return datum ? `${datum.key}${key}` : `${key}`;
-      },
+      label: dimensionLabel.bind(null, key),
       data:  prop(key),
       scale: typeScale(types[key])
     };
@@ -33,11 +31,21 @@ export function entityDimensions(entity) {
 export function objectDimensions(object) {
   return Object.keys(object).map(key => {
     return {
-      label: datum => {
-        return datum ? `${datum.key}${key}` : `${key}`;
-      },
-      data:  prop(key),
-      scale: typeScale(typer.detect(object[key]))
+      label : dimensionLabel.bind(null, key),
+      data  : prop(key),
+      scale : typeScale(typer.detect(object[key]))
     };
   });
+}
+
+/**
+ * @todo: allow for this function to be overwritten so it works with the data
+ * format the developer chooses to use. This is the default label function.
+ *
+ * @param {string} key
+ * @param {object} [datum={}]
+ * @returns {string} the label used for the dimension.
+ */
+function dimensionLabel(key, datum = {}) {
+  return datum.key ? `${datum.key}${key}` : `${key}`;
 }

@@ -1,6 +1,7 @@
-import arrayEquals from 'array-equal';
-import extend      from 'extend';
-import {logger}    from './aurelia-charts';
+import arrayEquals  from 'array-equal';
+import extend       from 'extend';
+import {logger}     from './aurelia-charts';
+import {Translator} from './translator';
 
 /**
  * @class
@@ -16,9 +17,9 @@ export class Config {
   };
 
   /* stores library and it's types and a reference to it's contructor */
-  charts = {};
-
-  scales = [];
+  charts     = {};
+  scales     = [];
+  translator = Translator;
 
   /**
    * @param {string} library

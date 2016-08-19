@@ -1,4 +1,5 @@
 import {logger} from './aurelia-charts';
+import {Config} from './config';
 
 /**
  * used when defining library chart types. It warns developers that certain
@@ -6,11 +7,16 @@ import {logger} from './aurelia-charts';
  *
  * @class
  */
+@inject(Config)
 export class Chart {
 
   settings   = {};
   dimensions = [];
   data       = {};
+
+  constructor(config) {
+    this.config = config;
+  }
 
   create() {
     warn('create');
@@ -24,7 +30,9 @@ export class Chart {
     warn('destroy');
   }
 
-  /* @todo: add user friendly methods on the chart class */
+  translate(str) {
+    return config.translate(str);
+  }
 
 }
 
